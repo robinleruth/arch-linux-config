@@ -1,0 +1,33 @@
+" if has('python3')
+"   silent! python3 1
+" endif
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+
+call plug#begin('~/.vim/plugged')
+Plug 'davidhalter/jedi-vim'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'klen/python-mode'
+Plug 'vim-python/python-syntax'
+Plug 'mgedmin/python-imports.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kien/ctrlp.vim'
+call plug#end()
+
+syntax enable
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+filetype indent on
+set autoindent
+
+let g:ycm_global_ycm_extra_conf = "/home/robin/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
+
+let g:gutentags_modules = ['ctags']
+let g:gutentags_cache_dir = '~/.vim/gutentags'
+
+map <F5>    :ImportName<CR>
+map <C-F5>  :ImportNameHere<CR>
