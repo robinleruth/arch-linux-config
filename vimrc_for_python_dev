@@ -42,3 +42,5 @@ augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
+
+autocmd Filetype netrw nmap <buffer> <F6> ma:argdo tabnew<CR>
