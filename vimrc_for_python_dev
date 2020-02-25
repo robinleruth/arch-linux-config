@@ -35,6 +35,7 @@ map <C-E>   :b#<CR>
 
 map <F2>    :mksession! ~/vim_session<CR>
 map <F3>    :source ~/vim_session<CR>
+map <F7>    :Vexplore<CR>
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
