@@ -26,7 +26,7 @@ if 'test' in file_name:
         f.write(f'class {class_name}(unittest.TestCase):\n')
         f.write('    def setUp(self):\n        pass\n\n')
         f.write('    def tearDown(self):\n        pass\n\n')
-        f.write('    def test(self):\n        pass\n\n')
+        f.write('    def test(self):\n        pass\n\n\n')
         f.write("if __name__ == '__main__':\n")
         f.write('    unittest.main(verbosity=2)\n')
 else:
