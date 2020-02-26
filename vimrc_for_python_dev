@@ -39,6 +39,7 @@ map <F3>    :source ~/vim_session<CR>
 map <F7>    :Vexplore<CR>
 map <F8>    :!python ~/bin/create_package.py 
 map <F9>    :!python ~/bin/create_python_file.py  
+map <C-F9>  :!clear;pwd<CR>
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
