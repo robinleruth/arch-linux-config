@@ -1,0 +1,6 @@
+
+filetype on
+augroup C_Python_Settings
+	autocmd FileType python source ~/vimrc_for_python_dev.vim
+	autocmd FileType cpp source ~/vimrc_for_c++_dev.vim
+augroup END
