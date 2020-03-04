@@ -2,7 +2,7 @@ import os
 
 import sys
 
-if len(sys.argv) != 2:
+if len(sys.argv) < 2:
     print("Please give a file name as first argument")
     sys.exit()
 
@@ -19,6 +19,22 @@ file_name = sys.argv[1]
 file_name_without_py = os.path.splitext(file_name)[0]
 
 class_name = re.sub(REG, camel_upper, file_name_without_py, 0) if '_' in file_name_without_py else file_name_without_py.capitalize()
+
+if ".js" in file_name:
+    class_type = sys.argv[2] if len(sys.argv) == 3 else None
+    if class_type and class_type == 'model':
+        with open(os.path.join(os.getcwd(), file_name), 'w') as f:
+            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.Model.extend({{\n }});\n ")
+    elif class_type and class_type == 'view':
+        with open(os.path.join(os.getcwd(), file_name), 'w') as f:
+            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.View.extend({{\n    template: _.template($('#').html()),\n    tagName: 'div',\n    className: '',\n    events: {{\n    }},\n    initialize: function(){{\n        this.listenTo(this.model, 'change', this.render);\n        this.listenTo(this.model, 'destroy', this.remove);\n        this.listenTo(this.model, 're-render', this.render);\n    }},\n    render: function(){{\n        this.$el.html(this.template(this.model.toJSON()));\n        return this;\n    }},\n }});\n ")
+    elif class_type and class_type == 'collection':
+        with open(os.path.join(os.getcwd(), file_name), 'w') as f:
+            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.Collection.extend({{\n    model: '',\n    url: ''\n }});\n ")
+    else:
+        with open(os.path.join(os.getcwd(), file_name), 'w') as f:
+            f.write(" ")
+    sys.exit()
 
 if 'test' in file_name:
     with open(os.path.join(os.getcwd(), file_name), 'w') as f:
