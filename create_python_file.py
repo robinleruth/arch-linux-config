@@ -36,6 +36,13 @@ if ".js" in file_name:
             f.write(" ")
     sys.exit()
 
+if ".h" in file_name:
+    file_name = class_name + ".h"
+    file_name_without_py = file_name_without_py.upper()
+    with open(os.path.join(os.getcwd(), file_name), 'w') as f:
+        f.write(f"#ifndef {file_name_without_py}_H\n#define {file_name_without_py}_H\n \n \n class {class_name}{{\n    public:\n        {class_name}();\n        ~{class_name}();\n    private:\n }}\n \n \n \n#endif\n ")
+    sys.exit()
+
 if 'test' in file_name:
     with open(os.path.join(os.getcwd(), file_name), 'w') as f:
         f.write('import unittest\n\n\n')
