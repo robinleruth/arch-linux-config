@@ -38,5 +38,8 @@ let g:ycm_global_ycm_extra_conf = "/home/robin/.vim/plugged/YouCompleteMe/.ycm_e
 let g:gutentags_modules = ['ctags']
 let g:gutentags_cache_dir = '~/.vim/gutentags'
 
-map <F5>    :ImportName<CR>
-map <C-F5>  :ImportNameHere<CR>
+map <F10>    :!make<CR>
+map <C-F10>  :!make clean<CR>
+
+nmap _i I<C-m><Esc>4Go#include ""<Esc>$i
+nmap _I I<C-m><Esc>4Go#include <><Esc>$i
