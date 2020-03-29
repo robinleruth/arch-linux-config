@@ -25,13 +25,18 @@ if ".js" in file_name:
     class_type = sys.argv[2] if len(sys.argv) == 3 else None
     if class_type and class_type == 'model':
         with open(os.path.join(os.getcwd(), file_name), 'w') as f:
-            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.Model.extend({{\n }});\n ")
+            f.write(f"'use strict';\n\nvar app = app || {{}};\n\napp.{class_name} = Backbone.Model.extend({{\n}});\n")
     elif class_type and class_type == 'view':
+        template_name = file_name_without_py + "_template"
         with open(os.path.join(os.getcwd(), file_name), 'w') as f:
-            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.View.extend({{\n    template: _.template($('#').html()),\n    tagName: 'div',\n    className: '',\n    events: {{\n    }},\n    initialize: function(){{\n        this.listenTo(this.model, 'change', this.render);\n        this.listenTo(this.model, 'destroy', this.remove);\n        this.listenTo(this.model, 're-render', this.render);\n    }},\n    render: function(){{\n        this.$el.html(this.template(this.model.toJSON()));\n        return this;\n    }},\n }});\n ")
+            f.write(f"'use strict';\n\nvar app = app || {{}};\n\napp.{class_name} = Backbone.View.extend({{\n   template: _.template($('#" + template_name + "').html()),\n   tagName: 'div',\n   className: '',\n   events: {{\n   }},\n   initialize: function(){{\n       this.listenTo(this.model, 'change', this.render);\n       this.listenTo(this.model, 'destroy', this.remove);\n       this.listenTo(this.model, 're-render', this.render);\n   }},\n   render: function(){{\n       this.$el.html(this.template(this.model.toJSON()));\n       return this;\n   }},\n}});\n")
+        with open(os.path.join(os.getcwd(), file_name_without_py + '_template.html'), 'w') as f:
+            f.write("<link rel='stylesheet' type='text/css' href='" + file_name_without_py + "_style.css" + "'>\n<script type='text/template' id='" + template_name + "></script>")
+        with open(os.path.join(os.getcwd(), file_name_without_py + '_style.css'), 'w') as f:
+            f.write("\n")
     elif class_type and class_type == 'collection':
         with open(os.path.join(os.getcwd(), file_name), 'w') as f:
-            f.write(f"'use strict';\n \n var app = app || {{}};\n \n app.{class_name} = Backbone.Collection.extend({{\n    model: '',\n    url: ''\n }});\n ")
+            f.write(f"'use strict';\n\nvar app = app || {{}};\n\napp.{class_name} = Backbone.Collection.extend({{\n   model: '',\n   url: ''\n}});\n")
     else:
         with open(os.path.join(os.getcwd(), file_name), 'w') as f:
             f.write(" ")
