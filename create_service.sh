@@ -12,6 +12,7 @@ do
 done
 mkdir -p $root_directory/test
 touch $root_directory/test/__init__.py
+touch $root_directory/app/__init__.py
 cat > $root_directory/app/infrastructure/config.py  << EOL
 import os
 
